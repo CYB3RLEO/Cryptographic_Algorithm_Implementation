@@ -2,7 +2,7 @@ import os
 import base64
 from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import getpass
 
 
@@ -17,7 +17,7 @@ def derive_key_from_password(password: str, salt: bytes) -> bytes:
     Returns:
         32-byte key suitable for ChaCha20-Poly1305
     """
-    kdf = PBKDF2(
+    kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=32,
         salt=salt,
